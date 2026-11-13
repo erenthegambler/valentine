@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Küçük Bir Soru... 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #ffe6f0;
+    color: #881337;
+    text-align: center;
+}
+
+.screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 18px;
+}
+
+#question {
+    background: #ffe6f0;
+}
+
+#celebration {
+    display: none;
+    background:
+        linear-gradient(rgba(255,240,245,.15), rgba(255,240,245,.15)),
+        url("tulip.jpg") center center / cover no-repeat;
+    color: #881337;
+}
+
+.gif {
+    width: min(320px, 85vw);
+    max-height: 240px;
+    object-fit: contain;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(21px, 5vw, 27px);
+    margin: 10px 0 20px;
+}
+
+.description {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 14px 27px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform .2s, font-size .2s;
+}
+
+#yes {
+    background: #db2777;
+    color: white;
+}
+
+#no {
+    background: #fda4af;
+    color: #881337;
+}
+
+#success-title {
+    background: rgba(255,255,255,.72);
+    padding: 12px 20px;
+    border-radius: 15px;
+}
+
+#success-description {
+    background: rgba(255,255,255,.72);
+    padding: 12px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+@media(max-width: 480px) {
+    .gif {
+        max-width: 85vw;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    button {
+        padding: 13px 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SORU EKRANI -->
+<section id="question" class="screen">
+
+    <img src="kirara.gif" class="gif" alt="Kirara GIF">
+
+    <h1>
+        Artık adını koyma zamanı gelmedi mi?<br>
+        Let's fly my dear<br>
+        Till the end...
+    </h1>
+
+    <div class="description">
+        Benimle bir ömüre var mısın?<br>
+        Would you be my Valentine?
+    </div>
+
+    <div class="buttons">
+        <button id="yes" onclick="accept()">Evet</button>
+        <button id="no" onclick="sayNo()">Hayır</button>
+    </div>
+
+</section>
+
+
+<!-- KUTLAMA EKRANI -->
+<section id="celebration" class="screen">
+
+    <img src="kutlama.gif" class="gif" alt="Kutlama GIF">
+
+    <h1 id="success-title">
+        Sistem Onaylandı! ❤️
+    </h1>
+
+    <div id="success-description">
+        Darling,<br>
+        You have the biggest heart...❤️
+    </div>
+
+</section>
+
+
+<script>
+
+const messages = [
+    "Come on jeyjey",
+    "Gerçekten mi?",
+    "Son şans!",
+    "Bunu yapmazsın herhalde?",
+    "Kalbimi kırıyorsun :(",
+    "Yahu bir düşün!",
+    "Hala hayır mı diyorsun?",
+    "İnat etme artık :)",
+    "Evet'e basmanı bekliyorum!"
+];
+
+let clickCount = 0;
+
+function sayNo() {
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+
+    clickCount++;
+
+    if (clickCount < messages.length + 1) {
+        noButton.textContent = messages[clickCount - 1];
+    }
+
+    if (clickCount >= messages.length + 1) {
+        noButton.style.display = "none";
+    }
+
+    const newSize = Math.min(17 + clickCount * 4, 65);
+    yesButton.style.fontSize = newSize + "px";
+    yesButton.style.padding = "14px 27px";
+}
+
+function accept() {
+    document.getElementById("question").style.display = "none";
+    document.getElementById("celebration").style.display = "flex";
+}
+
+</script>
+
+</body>
+</html>
